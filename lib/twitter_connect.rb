@@ -20,3 +20,7 @@ end
   ActiveSupport::Dependencies.load_paths << path
   ActiveSupport::Dependencies.load_once_paths.delete(path)
 end
+
+unless File.exist?(File.join(Rails.root, "/public/javascripts/twitter_connect.js"))
+  File.copy(File.join(File.dirname(__FILE__), "/public/javascripts/twitter_connect.js"), File.join(Rails.root, "/public/javascripts/twitter_connect.js"))
+end
