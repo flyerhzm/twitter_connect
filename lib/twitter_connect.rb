@@ -5,20 +5,22 @@ module TwitterConnect
   class <<self
     def load_configuration(twitter_yaml_file)
       return false unless File.exist?(twitter_yaml_file)
-      @twitter_configuration = YAML.load(File.read(twitter_yaml_file))
-      if defined? RAILS_ENV
-        @twitter_configuration = @twitter_configuration[RAILS_ENV]
-      end
-      Thread.current[:tc_config] = @twitter_configuration unless Thread.current[:tc_config]
+      @configuration = YAML.load(File.read(twitter_yaml_file))[RAILS_ENV]
+    end
+
+    def configuration
+      @configuration
     end
   end
 end
 
-%w{ controllers helpers views }.each do |dir|
-  path = File.join(File.dirname(__FILE__), 'app', dir)
-  $LOAD_PATH << path
-  ActiveSupport::Dependencies.load_paths << path
-  ActiveSupport::Dependencies.load_once_paths.delete(path)
+require 'app/controllers/twitter_connects_controller'
+require 'app/helpers/twitter_connects_helper'
+
+module ActionController
+  class Base
+    helper TwitterConnectsHelper
+  end
 end
 
 unless File.exist?(File.join(Rails.root, "/public/javascripts/twitter_connect.js"))

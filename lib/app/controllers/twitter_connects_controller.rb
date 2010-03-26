@@ -1,22 +1,24 @@
 class TwitterConnectsController < ActionController::Base
   def oauth
     oauth = get_oauth
-    rtoken  = oauth.request_token.token
-    rsecret = oauth.request_token.secret
-   
-    oauth.set_callback_url callback_twitter_connects_path
+    request_token = oauth.set_callback_url callback_url
+    session[:rtoken] = request_token.token
+    session[:rsecret] = request_token.secret
     redirect_to oauth.request_token.authorize_url
   end
  
   def callback
-    session[:oauth_token] = params[:oauth_token]
-    session[:oauth_verifier] = params[:oauth_verifier]
     oauth = get_oauth
-    oauth.authorize_from_access(params[:oauth_token], params[:oauth_verifier])
+    oauth.authorize_from_request(session[:rtoken], session[:rsecret], params[:oauth_verifier])
+    session[:rtoken] = nil
+    session[:rsecret] =nil
+    session[:oauth_token] = oauth.authorize_token.token
+    session[:oauth_verifier] = oauth.authorize_token.secret
+    render :file => File.dirname(__FILE__) + '/../views/twitter_connects/callback.html.erb'
   end
 
   private
     def get_oauth
-      oauth = Twitter::OAuth.new(Thread.current[:tc_config]['consumer_token'], Thread.current[:tc_config]['consumer_secret'])
+      oauth = Twitter::OAuth.new(TwitterConnect.configuration['consumer_token'], TwitterConnect.configuration['consumer_secret'])
     end
 end
