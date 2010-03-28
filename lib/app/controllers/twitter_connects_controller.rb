@@ -4,7 +4,7 @@ class TwitterConnectsController < ActionController::Base
     request_token = oauth.set_callback_url callback_url
     session[:rtoken] = request_token.token
     session[:rsecret] = request_token.secret
-    redirect_to oauth.request_token.authorize_url
+    redirect_to request_token.authorize_url
   end
  
   def callback
