@@ -5,7 +5,7 @@ facebook connect style twitter oauth
 ## Install
 
 For rails3
-<code>rails plugin install git://github.com/flyerhzm/twitter_connect.git</code>
+<pre><code>rails plugin install git://github.com/flyerhzm/twitter_connect.git</code></pre>
 
 ## Usage
 
