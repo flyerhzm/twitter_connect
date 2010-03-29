@@ -12,10 +12,17 @@ class TwitterConnectsController < ActionController::Base
     oauth = get_oauth
     oauth.authorize_from_request(session[:rtoken], session[:rsecret], params[:oauth_verifier])
     session[:rtoken] = nil
-    session[:rsecret] =nil
+    session[:rsecret] = nil
     session[:atoken] = oauth.access_token.token
     session[:asecret] = oauth.access_token.secret
     render :file => File.dirname(__FILE__) + '/../views/twitter_connects/callback.html.erb'
+  end
+  
+  def logout
+    session[:atoken] = nil
+    session[:asecret] = nil
+    
+    redirect_to root_url
   end
 
   private
