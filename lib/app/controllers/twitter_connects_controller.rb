@@ -4,6 +4,7 @@ class TwitterConnectsController < ActionController::Base
     request_token = oauth.set_callback_url callback_url
     session[:rtoken] = request_token.token
     session[:rsecret] = request_token.secret
+    
     redirect_to request_token.authorize_url
   end
  
@@ -12,8 +13,8 @@ class TwitterConnectsController < ActionController::Base
     oauth.authorize_from_request(session[:rtoken], session[:rsecret], params[:oauth_verifier])
     session[:rtoken] = nil
     session[:rsecret] =nil
-    session[:oauth_token] = oauth.authorize_token.token
-    session[:oauth_verifier] = oauth.authorize_token.secret
+    session[:oauth_token] = oauth.access_token.token
+    session[:oauth_verifier] = oauth.access_token.secret
     render :file => File.dirname(__FILE__) + '/../views/twitter_connects/callback.html.erb'
   end
 
