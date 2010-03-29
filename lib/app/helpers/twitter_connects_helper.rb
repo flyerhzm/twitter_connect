@@ -1,10 +1,10 @@
 module TwitterConnectsHelper
 
-  def tc_login_button(login_callback, oauth_url, class_name=nil)
+  def tc_login_button(login_callback, options={})
     if session[:atoken] and session[:asecret]
-      link_to 'Twitter', '#', :onclick => login_callback, :class => "#{class_name}"
+      link_to options[:text] || 'Sign in with Twitter', '#', :onclick => login_callback, :class => "#{options[:class_name]}"
     else
-      link_to 'Twitter', oauth_url, :onlogin => login_callback, :class => "#{class_name} twitter_oauth"
+      link_to options[:text] || 'Sign in with Twitter', oauth_url, :onlogin => login_callback, :class => "#{options[:class_name]} twitter_oauth"
     end
   end
 end
