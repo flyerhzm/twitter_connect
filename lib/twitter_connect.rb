@@ -35,6 +35,8 @@ module ActionController
   end
 end
 
+require 'ftools'
+
 unless File.exist?(File.join(Rails.root, "/public/javascripts/twitter_connect.js"))
   File.copy(File.join(File.dirname(__FILE__), "/public/javascripts/twitter_connect.js"), File.join(Rails.root, "/public/javascripts/twitter_connect.js"))
 end
