@@ -1,6 +1,7 @@
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
+require 'jeweler'
 
 desc 'Default: run unit tests.'
 task :default => :test
@@ -21,3 +22,15 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+Jeweler::Tasks.new do |gemspec|
+  gemspec.name = "twitter_connect"
+  gemspec.summary = "facebook connect style twitter oauth"
+  gemspec.description = "facebook connect style twitter oauth"
+  gemspec.email = "flyerhzm@gmail.com"
+  gemspec.homepage = "http://github.com/flyerhzm/twitter_connect"
+  gemspec.authors = ["Richard Huang"]
+  gemspec.files.exclude '.gitignore'
+  gemspec.add_dependency 'twitter'
+end
+Jeweler::GemcutterTasks.new

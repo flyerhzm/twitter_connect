@@ -24,7 +24,7 @@ module ActionController
     def set_twitter_client
       begin
         oauth = Twitter::OAuth.new(TwitterConnect.configuration['consumer_token'], TwitterConnect.configuration['consumer_secret'])
-        oauth.authorize_from_access(session["atoken"], session["asecret"])
+        oauth.authorize_from_access(session[:atoken], session[:asecret])
         @twitter_client = Twitter::Base.new(oauth)
       rescue Twitter::Unauthorized
         redirect_to TwitterConnect.configuration['logout_url'] || root_url

@@ -8,7 +8,7 @@ facebook connect style twitter oauth
 
 ## Install
 
-<pre><code>script/plugin install git://github.com/flyerhzm/twitter_connect.git</code></pre>
+<pre><code>rails plugin install git://github.com/flyerhzm/twitter_connect.git</code></pre>
 
 ## Usage
 
@@ -28,9 +28,9 @@ logout_url is where the app go to when user logs out or the session expired.
 
 2 define routes
 <pre><code>
-map.twitter_oauth '/twitter_oauth', :controller => 'twitter_connects', :action => 'oauth'
-map.twitter_callback '/twitter_callback', :controller => 'twitter_connects', :action => 'callback'
-map.twitter_logout '/twitter_logout', :controller => 'twitter_connects', :action => 'logout'
+match '/twitter_oauth', :to => "twitter_connects#oauth", :as => :twitter_oauth
+match '/twitter_callback', :to => "twitter_connects#callback", :as => :twitter_callback
+match '/twitter_logout', :to => "twitter_connects#logout", :as => :twitter_logout
 </code></pre>
 
 3 add javascript to html header
