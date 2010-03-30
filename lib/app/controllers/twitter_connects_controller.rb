@@ -22,7 +22,7 @@ class TwitterConnectsController < ActionController::Base
     session[:atoken] = nil
     session[:asecret] = nil
     
-    redirect_to root_url
+    redirect_to TwitterConnect.configuration['logout_url'] || root_url
   end
 
   private

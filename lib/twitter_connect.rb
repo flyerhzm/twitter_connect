@@ -5,7 +5,7 @@ module TwitterConnect
   class <<self
     def load_configuration(twitter_yaml_file)
       return false unless File.exist?(twitter_yaml_file)
-      @configuration = YAML.load(File.read(twitter_yaml_file))[RAILS_ENV]
+      @configuration = YAML.load_file(twitter_yaml_file)[RAILS_ENV]
     end
 
     def configuration
@@ -20,6 +20,18 @@ require 'app/helpers/twitter_connects_helper'
 module ActionController
   class Base
     helper TwitterConnectsHelper
+    
+    def set_twitter_client
+      begin
+        oauth = Twitter::OAuth.new(TwitterConnect.configuration['consumer_token'], TwitterConnect.configuration['consumer_secret'])
+        oauth.authorize_from_access(session["atoken"], session["asecret"])
+        @twitter_client = Twitter::Base.new(oauth)
+      rescue Twitter::Unauthorized
+        redirect_to TwitterConnect.configuration['logout_url'] || root_url
+      end
+    end
+    
+    attr_reader :twitter_client
   end
 end
 

@@ -16,10 +16,14 @@ For rails3
 development:
   consumer_token: 
   consumer_secret: 
+  logout_url: 
 production:
   consumer_token: 
   consumer_secret: 
+  logout_url:
 </code></pre>
+consumer_token and consumer_secret are fetched after you registered a twitter app.
+logout_url is where the app go to when user logs out or the session expired.
 
 2 define routes
 <pre><code>
