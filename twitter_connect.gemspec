@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
      "tasks/twitter_connect_tasks.rake",
      "test/test_helper.rb",
      "test/twitter_connect_test.rb",
+     "twitter_connect.gemspec",
      "uninstall.rb"
   ]
   s.homepage = %q{http://github.com/flyerhzm/twitter_connect}
