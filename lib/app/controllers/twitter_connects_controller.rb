@@ -1,3 +1,5 @@
+require 'twitter'
+
 class TwitterConnectsController < ActionController::Base
   def oauth
     oauth = get_oauth
