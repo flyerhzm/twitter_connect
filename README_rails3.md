@@ -8,7 +8,7 @@ facebook connect style twitter oauth
 
 ## Install
 
-<pre><code>rails plugin install git://github.com/flyerhzm/twitter_connect.git</code></pre>
+<pre><code>sudo gem install twitter-connect</code></pre>
 
 ## Usage
 

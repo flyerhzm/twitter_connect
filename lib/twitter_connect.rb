@@ -11,6 +11,14 @@ module TwitterConnect
     def configuration
       @configuration
     end
+    
+    def init
+      unless File.exist?(File.join(Rails.root, "/public/javascripts/twitter_connect.js"))
+        File.copy(File.join(File.dirname(__FILE__), "/public/javascripts/twitter_connect.js"), File.join(Rails.root, "/public/javascripts/twitter_connect.js"))
+      end
+    
+      load_configuration("#{Rails.root}/config/twitter.yml")
+    end
   end
 end
 
@@ -36,7 +44,13 @@ module ActionController
 end
 
 require 'ftools'
-
-unless File.exist?(File.join(Rails.root, "/public/javascripts/twitter_connect.js"))
-  File.copy(File.join(File.dirname(__FILE__), "/public/javascripts/twitter_connect.js"), File.join(Rails.root, "/public/javascripts/twitter_connect.js"))
+if defined? Rails::Railtie
+  class TwitterRailtie < Rails::Railtie
+    initializer "twitter_connect.init_task" do |app|
+      TwitterConnect.init
+    end
+  end
+else
+  TwitterConnect.init
 end
+
