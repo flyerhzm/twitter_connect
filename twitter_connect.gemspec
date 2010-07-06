@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{twitter_connect}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Richard Huang"]
-  s.date = %q{2010-03-31}
+  s.date = %q{2010-07-06}
   s.description = %q{facebook connect style twitter oauth}
   s.email = %q{flyerhzm@gmail.com}
   s.extra_rdoc_files = [
@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
      "lib/app/views/twitter_connects/callback.html.erb",
      "lib/public/javascripts/twitter_connect.js",
      "lib/twitter_connect.rb",
+     "lib/twitter_oauth.rb",
      "rails/init.rb",
      "tasks/twitter_connect_tasks.rake",
      "test/test_helper.rb",
