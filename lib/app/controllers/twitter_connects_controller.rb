@@ -1,6 +1,9 @@
 require 'twitter'
+require File.join(File.dirname(__FILE__), '..', '..', 'twitter_oauth')
 
 class TwitterConnectsController < ActionController::Base
+  include TwitterOauth
+  
   def oauth
     oauth = get_oauth
     request_token = oauth.set_callback_url twitter_callback_url
@@ -26,9 +29,4 @@ class TwitterConnectsController < ActionController::Base
     
     redirect_to TwitterConnect.configuration['logout_url'] || root_url
   end
-
-  private
-    def get_oauth
-      oauth = Twitter::OAuth.new(TwitterConnect.configuration['consumer_token'], TwitterConnect.configuration['consumer_secret'])
-    end
 end

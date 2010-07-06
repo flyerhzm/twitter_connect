@@ -53,5 +53,18 @@ Or:
 <%= link_to "Logout from Twitter", twitter_logout_path %>
 </code></pre>
 
+6 get twitter information or post tweet
+<pre><code> 
+class TwitterConnect < ApplicationController
+  include TwitterOauth
+  
+  def tweet
+    oauth = get_oauth
+    client = Twitter::Base.new(oauth)
+    client.update('test')
+  end
+end
+</code></pre>
+
 
 Copyright (c) 2010 [Richard Huang], released under the MIT license

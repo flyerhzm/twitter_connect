@@ -22,6 +22,7 @@ module TwitterConnect
   end
 end
 
+require 'twitter_oauth'
 require 'app/controllers/twitter_connects_controller'
 require 'app/helpers/twitter_connects_helper'
 
